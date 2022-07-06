@@ -74,10 +74,12 @@ ramenForm.addEventListener("submit", async (e) => {
   const res = await createRamen(newRamen);
   console.log(res);
 });
+displayRamenImages();
 
 // Advanced Deliverables
 
-// displayRamenImages();
-// const firstRender = () => {
+// const renderFirstRamen = async () => {
+//   const ramenList = await fetchRamen();
+//   const firstRamenObj = ramenList[0];
 //   setRamenDetails();
 // };
