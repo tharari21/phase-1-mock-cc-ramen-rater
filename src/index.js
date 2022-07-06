@@ -4,21 +4,38 @@ const ramenName = ramenDetail.querySelector(".name");
 const ramenRestaurant = ramenDetail.querySelector(".restaurant");
 const ramenRating = document.querySelector("#rating-display");
 const ramenComment = document.querySelector("#comment-display");
-const ramenForm = document.querySelector("#new-ramen");
+const createRamenForm = document.querySelector("#new-ramen");
+const editRamenForm = document.querySelector("#edit-ramen");
 const ramenImg = ramenDetail.querySelector(".detail-image");
+let curRamen;
+
 // write your code here
 const fetchRamen = async () => {
+  // get ramen
   const req = await fetch("http://localhost:3000/ramens");
   const res = await req.json();
   return res;
 };
 const createRamen = async (body) => {
+  // POST ramen
   const req = await fetch("http://localhost:3000/ramens", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
+  });
+  const res = await req.json();
+  return res;
+};
+const updateRamen = async (ramenId, ramenUpdateObj) => {
+  // PATCH ramen
+  const req = await fetch(`http://localhost:3000/ramens/${ramenId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(ramenUpdateObj),
   });
   const res = await req.json();
   return res;
@@ -41,6 +58,7 @@ const setRamenComment = (comment) => {
   ramenComment.textContent = comment;
 };
 const setRamenDetails = (ramenObj) => {
+  curRamen = ramenObj.id;
   setRamenImage(ramenObj.image);
   setRamenName(ramenObj.name);
   setRamenRestaurant(ramenObj.restaurant);
@@ -49,6 +67,9 @@ const setRamenDetails = (ramenObj) => {
 };
 
 const displayRamenImages = async () => {
+  while (ramenMenu.firstChild) {
+    ramenMenu.firstChild.remove();
+  }
   const ramen = await fetchRamen();
   ramen.forEach((ramenObj) => {
     const img = document.createElement("img");
@@ -61,7 +82,7 @@ const displayRamenImages = async () => {
   });
 };
 
-ramenForm.addEventListener("submit", async (e) => {
+createRamenForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   console.log(e.target.name.value);
   const newRamen = {
@@ -72,14 +93,27 @@ ramenForm.addEventListener("submit", async (e) => {
     comment: e.target["new-comment"].value,
   };
   const res = await createRamen(newRamen);
-  console.log(res);
+  displayRamenImages();
 });
-displayRamenImages();
+editRamenForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const updatedRamenObj = {
+    rating: e.target.rating.value,
+    comment: e.target["new-comment"].value,
+  };
+
+  const res = await updateRamen(curRamen, updatedRamenObj);
+  console.log(res);
+  setRamenDetails(res);
+});
 
 // Advanced Deliverables
 
-// const renderFirstRamen = async () => {
-//   const ramenList = await fetchRamen();
-//   const firstRamenObj = ramenList[0];
-//   setRamenDetails();
-// };
+const renderFirstRamen = async () => {
+  const ramenList = await fetchRamen();
+  const firstRamenObj = ramenList[0];
+  setRamenDetails(firstRamenObj);
+};
+
+renderFirstRamen();
+displayRamenImages();

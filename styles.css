@@ -100,3 +100,11 @@ form h4 {
   color: white;
   background-color: black;
 }
+
+#rating-display {
+  display: inline;
+  width: 45px;
+}
+#comment-display {
+  width: 220px;
+}

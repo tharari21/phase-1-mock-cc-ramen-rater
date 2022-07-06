@@ -5,8 +5,8 @@
       "name": "Shoyu Ramen",
       "restaurant": "Nonono",
       "image": "./assets/ramen/shoyu.jpg",
-      "rating": 7,
-      "comment": "Delish. Can't go wrong with a classic!"
+      "rating": "1",
+      "comment": "Shitty ramen"
     },
     {
       "id": 2,
@@ -55,6 +55,30 @@
       "rating": "5",
       "comment": "This is not bad",
       "id": 7
+    },
+    {
+      "name": "Another new ramen",
+      "restaurant": "A sick restaurant mannnn",
+      "image": "https://media.gettyimages.com/photos/delicious-bowl-of-ramen-being-prepared-in-the-kitchen-picture-id941193606?s=612x612",
+      "rating": "8",
+      "comment": "Solid ramen",
+      "id": 8
+    },
+    {
+      "name": "Ramen",
+      "restaurant": "Common Ramen",
+      "image": "https://glebekitchen.com/wp-content/uploads/2017/04/tonkotsuramenfront.jpg",
+      "rating": "10",
+      "comment": "Sick Ramen!",
+      "id": 9
+    },
+    {
+      "name": "New Ramen ",
+      "restaurant": "New Rest",
+      "image": "https://glebekitchen.com/wp-content/uploads/2017/04/tonkotsuramenfront.jpg",
+      "rating": "10",
+      "comment": "fdfd",
+      "id": 10
     }
   ]
 }
